@@ -6,20 +6,12 @@ import ListadoPacientes from "./components/ListadoPacientes.jsx";
 
 const App = () => {
 
-    const [pacientes, setPacientes] = useState([])
+    const [pacientes, setPacientes] = useState(JSON.parse(localStorage.getItem("pacientes")) ?? [])
     const [paciente, setPaciente] = useState({})
 
     useEffect(() => {
-        const obtenerLS = () => {
-            const pacientesLS = JSON.parse(localStorage.getItem("pacientes")) ?? [];
-            setPacientes(pacientesLS)
-        }
-        obtenerLS();
-    }, []);// []esta vacio por que solo se ejecuta una vez
-
-    useEffect(() => {
         localStorage.setItem("pacientes", JSON.stringify(pacientes));
-    }, [pacientes])// cada vez que hay un cambio en [pacientes] se ejecuta el codigo del useEffect
+    }, [pacientes])
 
     const eliminarPaciente = (id) => {
         const pacientesActualizados = pacientes.filter(paciente => paciente.id !== id);
@@ -30,7 +22,6 @@ const App = () => {
         <div className="container mx-auto mt-20">
             <Header
             ></Header>
-
             <div className="mt-12 flex">
                 <Formulario
                     paciente={paciente}
@@ -43,8 +34,6 @@ const App = () => {
                     eliminarPaciente={eliminarPaciente}
                 ></ListadoPacientes>
             </div>
-
-
         </div>
     )
 }

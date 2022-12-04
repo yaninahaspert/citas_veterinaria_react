@@ -25,11 +25,8 @@ function Formulario({pacientes, setPacientes, paciente, setPaciente}) {
         const fecha = Date.now().toString(36)
         return random + fecha;
     }
-
-
     const handSubmit = (e) => {
         e.preventDefault();
-
         //validaciones
         if ([nombre, propietario, email, sintomas, fecha].includes('')) {
             console.log("hay al menos un campo vacio")
